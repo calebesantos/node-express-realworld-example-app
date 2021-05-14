@@ -1,0 +1,24 @@
+GET '/api'
+POST '/api/users/login'
+POST '/api/users'
+GET '/api/tags/'
+
+auth.optional
+GET '/api/profiles/:username'
+GET '/api/articles/'
+GET '/api/articles/:article'
+GET '/api/articles/:article/comments'
+
+auth.required
+GET '/api/user'
+PUT '/api/user'
+POST '/api/profiles/:username/follow'
+DELETE '/api/profiles/:username/follow'
+GET '/api/articles/feed'
+POST '/api/articles/'
+PUT '/api/articles/:article'
+DELETE '/api/articles/:article'
+POST '/api/articles/:article/favorite'
+DELETE '/api/articles/:article/favorite'
+POST '/api/articles/:article/comments'
+DELETE '/api/articles/:article/comments/:comment'

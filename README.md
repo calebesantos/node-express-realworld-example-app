@@ -14,10 +14,8 @@ To get the Node server running locally:
 
 - Clone this repo
 - `npm install` to install all required dependencies
-- Install MongoDB Community Edition ([instructions](https://docs.mongodb.com/manual/installation/#tutorials)) and run it by executing `mongod`
+- `npm run mongo:start` to run local mongodb
 - `npm run dev` to start the local server
-
-Alternately, to quickly try out this repo in the cloud, you can [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/realworld)
 
 # Code Overview
 
@@ -46,6 +44,11 @@ In `routes/api/index.js`, we define a error-handling middleware for handling Mon
 
 Requests are authenticated using the `Authorization` header with a valid JWT. We define two express middlewares in `routes/auth.js` that can be used to authenticate requests. The `required` middleware configures the `express-jwt` middleware using our application's secret and will return a 401 status code if the request cannot be authenticated. The payload of the JWT can then be accessed from `req.payload` in the endpoint. The `optional` middleware configures the `express-jwt` in the same way as `required`, but will *not* return a 401 status code if the request cannot be authenticated.
 
+### Example JWT
+
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MjEwMTEwOTIsImV4cCI6MTY1MjU0NzA5MiwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsImdpdmVuTmFtZSI6IkpvaG5ueSIsInN1cm5hbWUiOiJSb2NrZXQiLCJlbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJyb2xlIjoiTWFuYWdlciIsImlkIjoiYXNkZjEyMzQifQ.lUw4aHW77KBhatfO9ypfhNN3LePIBtMHKWaX_JDCcGY
+```
 
 <br />
 

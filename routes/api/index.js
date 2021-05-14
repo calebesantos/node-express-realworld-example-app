@@ -5,10 +5,10 @@ router.use('/profiles', require('./profiles'));
 router.use('/articles', require('./articles'));
 router.use('/tags', require('./tags'));
 
-router.use(function(err, req, res, next){
-  if(err.name === 'ValidationError'){
+router.use(function (err, req, res, next) {
+  if (err.name === 'ValidationError') {
     return res.status(422).json({
-      errors: Object.keys(err.errors).reduce(function(errors, key){
+      errors: Object.keys(err.errors).reduce(function (errors, key) {
         errors[key] = err.errors[key].message;
 
         return errors;
@@ -18,5 +18,9 @@ router.use(function(err, req, res, next){
 
   return next(err);
 });
+
+router.get('/', function (req, res, next) {
+  return res.json({ status: 'OK' });
+})
 
 module.exports = router;
