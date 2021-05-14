@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "faccff16-f275-4cb3-bcbe-4ab0c81d54b7",
+		"name": "RealWorld Example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Server Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n        \"username\": \"kranio\",\n        \"email\": \"klabs@kranio.io\",\n        \"password\": \"kranio2019\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n        \"email\": \"klabs@kranio.io\",\n        \"password\": \"kranio2019\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Article (Auth required)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWViNTRlNDgzYzA5YzJmNzk0MTAxOCIsInVzZXJuYW1lIjoia3JhbmlvIiwiZXhwIjoxNjI2MTk4NzExLCJpYXQiOjE2MjEwMTQ3MTF9.EJjBpgeJCQeegf9pHd8urb2f-RmC7ZxDQfouaQOC1_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"article\": {\n        \"slug\": \"article-demo\",\n        \"title\": \"Article Demo\",\n        \"description\": \"This is a Demo\",\n        \"body\": \"Hello! This is an article demo. I hope do you like it!\",\n        \"tagList\": [\"Demo\"]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/articles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List articles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/articles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article by slug",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/articles/article-demo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"article-demo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create article comment (Auth required)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWViNTRlNDgzYzA5YzJmNzk0MTAxOCIsInVzZXJuYW1lIjoia3JhbmlvIiwiZXhwIjoxNjI2MTk4NzExLCJpYXQiOjE2MjEwMTQ3MTF9.EJjBpgeJCQeegf9pHd8urb2f-RmC7ZxDQfouaQOC1_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comment\": {\n        \"body\": \"Great!\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/articles/article-demo/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"article-demo",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article comments by slug",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/articles/article-demo/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"article-demo",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
