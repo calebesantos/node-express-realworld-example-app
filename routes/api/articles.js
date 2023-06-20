@@ -61,7 +61,7 @@ router.get('/', auth.optional, function (req, res, next) {
         .populate('author')
         .exec(),
       Article.count(query).exec(),
-      req.payload ? User.findById(req.payload.id) : null,
+      req.payload ? User.findById(req.auth.id) : null,
     ]).then(function (results) {
       var articles = results[0];
       var articlesCount = results[1];
@@ -78,7 +78,7 @@ router.get('/', auth.optional, function (req, res, next) {
 });
 
 router.post('/', auth.required, function (req, res, next) {
-  const user = User.findById(req.payload.id);
+  const user = User.findById(req.auth.id);
   if (!user) { return res.sendStatus(401); }
 
   var article = new Article(req.body.article);
@@ -93,8 +93,8 @@ router.post('/', auth.required, function (req, res, next) {
 // return an article
 router.get('/:article', auth.optional, function (req, res, next) {
   Promise.all([
-    req.payload ? User.findById(req.payload.id) : null,
-    req.article.populate('author').execPopulate()
+    req.payload ? User.findById(req.auth.id) : null,
+    req.article.populate('author')
   ]).then(function (results) {
     var user = results[0];
 
@@ -104,8 +104,8 @@ router.get('/:article', auth.optional, function (req, res, next) {
 
 // update article
 router.put('/:article', auth.required, function (req, res, next) {
-  User.findById(req.payload.id).then(function (user) {
-    if (req.article.author._id.toString() === req.payload.id.toString()) {
+  User.findById(req.auth.id).then(function (user) {
+    if (req.article.author._id.toString() === req.auth.id.toString()) {
       if (typeof req.body.article.title !== 'undefined') {
         req.article.title = req.body.article.title;
       }
@@ -133,10 +133,10 @@ router.put('/:article', auth.required, function (req, res, next) {
 
 // delete article
 router.delete('/:article', auth.required, function (req, res, next) {
-  User.findById(req.payload.id).then(function (user) {
+  User.findById(req.auth.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
 
-    if (req.article.author._id.toString() === req.payload.id.toString()) {
+    if (req.article.author._id.toString() === req.auth.id.toString()) {
       return req.article.remove().then(function () {
         return res.sendStatus(204);
       });
